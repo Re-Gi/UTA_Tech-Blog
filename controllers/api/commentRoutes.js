@@ -8,3 +8,8 @@ THEN I am able to view comments but I am prompted to log in again before I can a
     PUT - update Comment by id
     DELETE - destroy Comment by id
 */
+
+const router = require('express').Router();
+const { User, Post, Comment } = require('../../models');
+
+module.exports = router;
