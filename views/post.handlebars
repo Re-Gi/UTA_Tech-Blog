@@ -8,11 +8,12 @@ THEN the comment is saved and the post is updated to display the comment, the co
     <div class="col-md-7">
         <h2>{{title}}</h2>
         <p>{{content}}</p>
-        <p>Created by {{user.name}} on {{date_created}}</p>
+        <p>Created by {{user.username}} on {{date_created}}</p>
     </div>
-    {{#each post.comments as |comment|}}
+    {{#each comments as |comment|}}
     {{> comment}}
     {{/each}}
+    {{#if loggedIn}}
     <div class="col-md-7">
         <form class="form new-comment-form">
         <div class="form-group">
@@ -24,4 +25,5 @@ THEN the comment is saved and the post is updated to display the comment, the co
         </div>
         </form>
     </div>
+    {{/if}}
 </div>
