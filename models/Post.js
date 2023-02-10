@@ -31,7 +31,7 @@ Post.init(
           len: [8],
         },
       },
-      creator_id: {
+      user_id: {
         type: DataTypes.INTEGER,
         references: {
             model: 'user',

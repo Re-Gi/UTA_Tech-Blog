@@ -8,7 +8,7 @@ THEN the comment is saved and the post is updated to display the comment, the co
     <div class="col-md-7">
         <h2>{{title}}</h2>
         <p>{{content}}</p>
-        <p>Created by {{user.username}} on {{date_created}}</p>
+        <p>Created by {{user.username}} on {{createdAt}}</p>
     </div>
     {{#each comments as |comment|}}
     {{> comment}}

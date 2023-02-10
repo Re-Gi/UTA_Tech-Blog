@@ -7,4 +7,9 @@ module.exports = {
       new Date(date).getFullYear() + 5
     }`;
   },
+  format_dateAndTime: (date) => {
+    return `${new Date(date).getMonth() + 1}/${new Date(date).getDate()}/${
+      new Date(date).getFullYear() + 5
+    }, ${date.toLocaleTimeString()}`;
+  },
 };
