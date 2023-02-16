@@ -3,16 +3,20 @@ THEN I am able to delete or update my post and taken back to an updated dashboar
 
 <h1>Edit Post</h1>
 
-<div class="mb-3">
+<form class="form editPost-form" data-id="{{post.id}}">
+<div class="mb-3 form-group">
   <label for="editPost-title" class="editPost-form">Title:</label>
-  <textarea class="form-control" id="editPost-title" rows="1">{{post.title}}</textarea>
+  <textarea class="form-input" id="editPost-title" rows="1">{{post.title}}</textarea>
 </div>
-<div class="mb-3">
+<div class="mb-3 form-group">
   <label for="editPost-contents" class="editPost-form">Content:</label>
-  <textarea class="form-control" id="editPost-contents" rows="3">{{post.content}}</textarea>
+  <textarea class="form-input" id="editPost-contents" rows="3">{{post.content}}</textarea>
 </div>
-<button type="submit" class="editPost-form btn btn-primary btn-lg">Update</button>
-<button type="click" class="deletePost-btn btn btn-danger btn-lg" style="float:right;">Delete</button>
+<div class="form-group">
+  <button type="submit" class="btn btn-primary btn-lg">Update</button>
+</div>
+</form>
+<button type="click" data-id="{{post.id}}" class="deletePost-btn btn btn-danger btn-lg" style="float:right;">Delete</button>
 
 
-{{!-- <script src="/js/newPost.js"></script> --}}
+<script src="/js/editPost.js"></script>

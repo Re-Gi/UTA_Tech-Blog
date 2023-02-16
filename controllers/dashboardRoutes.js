@@ -49,9 +49,10 @@ router.get('/new', withAuth, async (req, res) => {
 
 router.get('/edit/:id', withAuth, async (req, res) => {
     try {
-      const postData = await Post.findByPk(req.params.id, {
+      const postData = await Post.findOne({
         where: {
-            user_id: req.session.user_id,
+          id: req.params.id,
+          user_id: req.session.user_id,
         },
       });
   
@@ -63,7 +64,7 @@ router.get('/edit/:id', withAuth, async (req, res) => {
         logged_in: req.session.logged_in
       });
     } catch (err) {
-      res.status(500).json(err);
+      res.status(500).redirect('/dashboard');
     }
 });
 
