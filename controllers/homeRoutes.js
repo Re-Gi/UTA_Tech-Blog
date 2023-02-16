@@ -1,6 +1,4 @@
-/* 
-
-WHEN I click on an existing blog post
+/* WHEN I click on an existing blog post
 THEN I am presented with the post title, contents, post creator’s username, and date created for that post and have the option to leave a comment */
 
 const router = require('express').Router();
@@ -12,7 +10,14 @@ THEN I am taken to the homepage and presented with existing blog posts that incl
 
 router.get('/', async (req, res) => {
     try {
-      const dbPostData = await Post.findAll();
+      const dbPostData = await Post.findAll({
+        include: [
+          { 
+            model: User, 
+            attributes: ['username'],
+          },
+        ],
+      });
   
       const posts = dbPostData.map((post) =>
         post.get({ plain: true })
@@ -20,40 +25,13 @@ router.get('/', async (req, res) => {
   
       res.render('homepage', {
         posts,
-        loggedIn: req.session.loggedIn,
+        logged_in: req.session.logged_in,
       });
     } catch (err) {
       console.log(err);
       res.status(500).json(err);
     }
   });
-
-/* WHEN I click on the dashboard option in the navigation
-THEN I am taken to the dashboard and presented with any blog posts I have already created and the option to add a new blog post */
-
-router.get('/dashboard', withAuth, async (req, res) => {
-try {
-    const userPostData = await Post.findAll({
-        where: {
-            user_id: req.session.userId,
-        },
-    });
-
-    const userPosts = userPostData.map((post) =>
-    post.get({ plain: true })
-    );
-
-    console.log(userPosts)
-
-    res.render('dashboard', {
-    userPosts,
-    loggedIn: req.session.loggedIn,
-    });
-} catch (err) {
-    console.log(err);
-    res.status(500).json(err);
-}
-});
 
 /* WHEN I click on an existing blog post
 THEN I am presented with the post title, contents, post creator’s username, and date created for that post and have the option to leave a comment
@@ -89,14 +67,11 @@ router.get('/post/:id', async (req, res) => {
       const comments = commentData.map((comment) =>
       comment.get({ plain: true })
       );
-
-      console.log(post);
-      console.log(comments);
   
-      res.render('post', {
+      res.render('viewPost', {
         ...post,
         comments,
-        loggedIn: req.session.loggedIn
+        logged_in: req.session.logged_in
       });
     } catch (err) {
       res.status(500).json(err);
@@ -105,7 +80,7 @@ router.get('/post/:id', async (req, res) => {
 
 router.get('/login', (req, res) => {
   // If the user is already logged in, redirect the request to another route
-  if (req.session.loggedIn) {
+  if (req.session.logged_in) {
     res.redirect('/');
     return;
   }

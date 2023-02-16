@@ -1,0 +1,19 @@
+{{!-- WHEN I click on the button to add a new blog post
+THEN I am prompted to enter both a title and contents for my blog post
+
+WHEN I click on the button to create a new blog post
+THEN the title and contents of my post are saved and I am taken back to an updated dashboard with my new blog post --}}
+
+<h1>Create New Post</h1>
+
+<div class="mb-3">
+  <label for="newPost-title" class="newPost-form">Title:</label>
+  <input type="text" class="form-control" id="newPost-title">
+</div>
+<div class="mb-3">
+  <label for="newPost-contents" class="newPost-form">Content:</label>
+  <textarea class="form-control" id="newPost-contents" rows="3"></textarea>
+</div>
+<button type="submit" class="newPost-form btn btn-primary btn-lg">Create</button>
+
+{{!-- <script src="/js/newPost.js"></script> --}}

@@ -8,17 +8,15 @@ THEN the comment is saved and the post is updated to display the comment, the co
     <div class="col-md-7">
         <h2>{{title}}</h2>
         <p>{{content}}</p>
-        <p>Created by {{user.username}} on {{createdAt}}</p>
+        <p>Created by {{user.username}} on {{format_dateAndTime createdAt}}</p>
     </div>
-    {{#each comments as |comment|}}
-    {{> comment}}
-    {{/each}}
-    {{#if loggedIn}}
+
+    {{#if logged_in}}
     <div class="col-md-7">
         <form class="form new-comment-form">
         <div class="form-group">
             <label for="new-comment">Leave a Comment: </label>
-            <input class="form-input" type="text" id="new-comment" name="new-comment" />
+            <textarea class="form-input" type="text" id="new-comment" name="new-comment"></textarea>
         </div>
         <div class="form-group">
             <button type="submit" class="btn btn-primary">Submit</button>
@@ -26,4 +24,8 @@ THEN the comment is saved and the post is updated to display the comment, the co
         </form>
     </div>
     {{/if}}
+
+    {{#each comments as |comment|}}
+    {{> comment}}
+    {{/each}}
 </div>

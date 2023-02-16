@@ -17,7 +17,7 @@ const hbs = exphbs.create({ helpers });
 // WHEN I am idle on the site for more than a set time
 // THEN I am able to view comments but I am prompted to log in again before I can add, update, or delete comments
 const sess = {
-  secret: 'Super secret secret',
+  secret: process.env.PASSPHRASE,
   cookie: {
     maxAge: 300000,
     httpOnly: true,

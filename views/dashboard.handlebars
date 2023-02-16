@@ -1,22 +1,15 @@
 {{!WHEN I click on the dashboard option in the navigation
-THEN I am taken to the dashboard and presented with any blog posts I have already created and the option to add a new blog post
-
-WHEN I click on the button to add a new blog post
-THEN I am prompted to enter both a title and contents for my blog post
-
-WHEN I click on the button to create a new blog post
-THEN the title and contents of my post are saved and I am taken back to an updated dashboard with my new blog post
-
-WHEN I click on one of my existing posts in the dashboard
-THEN I am able to delete or update my post and taken back to an updated dashboard}}
+THEN I am taken to the dashboard and presented with any blog posts I have already created and the option to add a new blog post}}
 
 {{#each userPosts as |post| }}
 <div class="row mb-4 post">
-  <a href="/posts/{{post.id}}">
+  <a href="/dashboard/edit/{{post.id}}">
     <div class="col-md-7">
         <h2>{{post.title}} {{format_dateAndTime post.createdAt}}</h2>
     </div>
   </a>
 </div>
 {{/each}}
+
 {{! Button for creating new posts }}
+<a href="/dashboard/new"><button type="button" class="btn btn-primary btn-lg">+ New Post</button></a>
