@@ -17,7 +17,7 @@ const loginFormHandler = async (event) => {
         alert('Failed to log in.');
       }
     }
-  };
+};
   
   const signupFormHandler = async (event) => {
     event.preventDefault();
@@ -38,13 +38,12 @@ const loginFormHandler = async (event) => {
         alert('Failed to sign up.');
       }
     }
-  };
+};
   
-  document
-    .querySelector('.login-form')
-    .addEventListener('submit', loginFormHandler);
-  
-  document
-    .querySelector('.signup-form')
-    .addEventListener('submit', signupFormHandler);
-  
+document
+  .querySelector('.login-form')
+  .addEventListener('submit', loginFormHandler);
+
+document
+  .querySelector('.signup-form')
+  .addEventListener('submit', signupFormHandler);
