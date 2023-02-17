@@ -26,16 +26,18 @@ THEN I see navigation links for the homepage, the dashboard, and the option to l
 <body>
   <header>
     <h1>TechBlog</h1>
+    <nav>
+      <a href="/">> Home</a>
+      <a href="/dashboard">> Dashboard</a>
+      {{#if logged_in}}
+      <a href="/" id="logout">> Logout</a><br>
+      <p>Hey, {{username}}</p>
+      {{else}}
+      <a href="/login">> Login</a>
+      {{/if}}
+    </nav>
   </header>
-  <nav>
-    <a href="/">Home</a>
-    <a href="/dashboard">Dashboard</a>
-    {{#if logged_in}}
-    <button id="logout" class="btn-no-style">Logout</button>
-    {{else}}
-    <a href="/login">Login</a>
-    {{/if}}
-  </nav>
+
 
   <main>
     <div class="posts">

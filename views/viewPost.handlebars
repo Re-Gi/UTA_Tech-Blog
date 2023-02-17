@@ -4,28 +4,21 @@ THEN I am presented with the post title, contents, post creator’s username, an
 WHEN I enter a comment and click on the submit button while signed in
 THEN the comment is saved and the post is updated to display the comment, the comment creator’s username, and the date created}}
 
-<div class="row mb-4 post">
-    <div class="col-md-7">
-        <h2>{{title}}</h2>
+<div class="card">
+<div class="card-body">
+        <h3>{{title}} <a href="/" class="exit-btn">X</a></h3>
         <p>{{content}}</p>
-        <p>Created by {{user.username}} on {{format_dateAndTime createdAt}}</p>
-    </div>
-
-    {{#if logged_in}}
-    <div class="col-md-7">
-        <form class="form new-comment-form">
-        <div class="form-group">
-            <label for="new-comment">Leave a Comment: </label>
-            <textarea class="form-input" type="text" id="new-comment" name="new-comment"></textarea>
-        </div>
-        <div class="form-group">
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
-        </form>
-    </div>
-    {{/if}}
-
-    {{#each comments as |comment|}}
-    {{> comment}}
-    {{/each}}
+        <p>Created by <b>{{user.username}}</b> on {{format_dateAndTime createdAt}}</p>
 </div>
+</div>
+
+{{> newComment}}
+
+{{#each comments as |comment|}}
+<div class="card">
+<div class="card-body">
+    <h4><b>{{user.username}}</b> {{format_dateAndTime createdAt}}</h4>
+    <p>{{content}}</p>
+</div>
+</div>
+{{/each}}

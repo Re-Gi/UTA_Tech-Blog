@@ -1,0 +1,17 @@
+{{#if logged_in}}
+<div class="card">
+<div class="card-body">
+    <form class="form newComment-form" data-id="{{id}}">
+        <div class="mb-3 form-group">
+            <label for="newComment" class="newComment-form">Comment:</label>
+            <textarea class="form-input" id="newComment" rows="2" maxlength="255"></textarea>
+        </div>
+        <div class="form-group">
+            <button class="btn btn-primary btn-md" type="submit">Post</button>
+        </div>
+    </form>
+</div>
+</div>
+
+    <script src="/js/comment.js"></script>
+{{/if}}

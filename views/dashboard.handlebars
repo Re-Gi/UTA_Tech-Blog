@@ -1,15 +1,18 @@
 {{!WHEN I click on the dashboard option in the navigation
 THEN I am taken to the dashboard and presented with any blog posts I have already created and the option to add a new blog post}}
 
+{{! Button for creating new posts }}
+<div>
+<a href="/dashboard/new"><button type="button" class="btn btn-primary btn-lg">+ New Post</button></a>
+</div>
+
 {{#each userPosts as |post| }}
-<div class="row mb-4 post">
+<div class="card">
+<div class="card-body">
   <a href="/dashboard/edit/{{post.id}}">
-    <div class="col-md-7">
-        <h2>{{post.title}} {{format_dateAndTime post.createdAt}}</h2>
-    </div>
+        <p style="float:right;">{{format_dateAndTime post.createdAt}}</p>
+        <h3>{{post.title}}</h3>
   </a>
 </div>
+</div>
 {{/each}}
-
-{{! Button for creating new posts }}
-<a href="/dashboard/new"><button type="button" class="btn btn-primary btn-lg">+ New Post</button></a>

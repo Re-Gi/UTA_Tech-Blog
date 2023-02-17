@@ -25,13 +25,14 @@ User.init(
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
+      validate: {
+        notEmpty: true,
+        len: [1,20],
+      },
     },
     password: {
       type: DataTypes.STRING,
       allowNull: false,
-      validate: {
-        len: [8],
-      },
     },
   },
   {

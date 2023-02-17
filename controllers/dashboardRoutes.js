@@ -19,6 +19,7 @@ router.get('/', withAuth, async (req, res) => {
     
         res.render('dashboard', {
         userPosts,
+        username: req.session.username,
         logged_in: req.session.logged_in,
         });
     } catch (err) {
@@ -36,6 +37,7 @@ router.get('/', withAuth, async (req, res) => {
 router.get('/new', withAuth, async (req, res) => {
     try {
       res.render('newPost', {
+        username: req.session.username,
         user_id: req.session.user_id,
         logged_in: req.session.logged_in
       });
@@ -60,6 +62,7 @@ router.get('/edit/:id', withAuth, async (req, res) => {
   
       res.render('editPost', {
         post,
+        username: req.session.username,
         user_id: req.session.user_id,
         logged_in: req.session.logged_in
       });
