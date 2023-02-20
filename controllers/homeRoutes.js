@@ -1,16 +1,10 @@
-/* WHEN I click on an existing blog post
-THEN I am presented with the post title, contents, post creator’s username, and date created for that post and have the option to leave a comment */
-
 const router = require('express').Router();
 const { User, Post, Comment } = require('../models');
-const withAuth = require('../utils/auth');
-
-/* WHEN I click on the homepage option in the navigation
-THEN I am taken to the homepage and presented with existing blog posts that include the post title and the date created */
 
 router.get('/', async (req, res) => {
     try {
       const dbPostData = await Post.findAll({
+        order: [['createdAt', 'DESC']],
         include: [
           { 
             model: User, 
@@ -32,13 +26,7 @@ router.get('/', async (req, res) => {
       console.log(err);
       res.status(500).json(err);
     }
-  });
-
-/* WHEN I click on an existing blog post
-THEN I am presented with the post title, contents, post creator’s username, and date created for that post and have the option to leave a comment
-
-WHEN I enter a comment and click on the submit button while signed in
-THEN the comment is saved and the post is updated to display the comment, the comment creator’s username, and the date created */
+});
 
 router.get('/post/:id', async (req, res) => {
     try {

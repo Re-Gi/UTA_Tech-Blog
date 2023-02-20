@@ -11,11 +11,8 @@ const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// Set up Handlebars.js engine with custom helpers
 const hbs = exphbs.create({ helpers });
 
-// WHEN I am idle on the site for more than a set time
-// THEN I am able to view comments but I am prompted to log in again before I can add, update, or delete comments
 const sess = {
   secret: process.env.PASSPHRASE,
   cookie: {
@@ -24,7 +21,7 @@ const sess = {
     secure: false,
     sameSite: 'strict',
   },
-  resave: false,
+  resave: true,
   saveUninitialized: true,
   store: new SequelizeStore({
     db: sequelize
@@ -33,7 +30,6 @@ const sess = {
 
 app.use(session(sess));
 
-// Inform Express.js on which template engine to use
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
