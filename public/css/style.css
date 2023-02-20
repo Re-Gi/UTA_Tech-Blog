@@ -4,7 +4,7 @@
 }
 
 body {
-    background-image: linear-gradient(to bottom right, rgb(37, 89, 119), 50%, rgb(255, 252, 244));
+    background-image: linear-gradient(to bottom right, rgb(255, 155, 125), 50%, rgb(255, 252, 244));
     background-repeat: no-repeat;
     background-attachment: fixed;
 }
@@ -25,6 +25,10 @@ header {
     color:rgb(255, 252, 244)
 }
 
+nav {
+    font-size: 20px;
+}
+
 h1 {
     font-size: 4rem;
     color: rgba(255, 255, 255, 0.952);
@@ -37,7 +41,7 @@ h2 {
 
 h3 {
     font-size: 2rem;
-    color:rgb(37, 89, 119);
+    color:black;
     font-weight: bold;
 }
 
