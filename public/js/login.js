@@ -5,6 +5,7 @@ const loginFormHandler = async (event) => {
     const password = document.querySelector('#password-login').value.trim();
   
     if (username && password) {
+      // POST request for logging a user in
       const response = await fetch('/api/user/login', {
         method: 'POST',
         body: JSON.stringify({ username, password }),
@@ -16,7 +17,10 @@ const loginFormHandler = async (event) => {
       } else {
         alert('Failed to log in.');
       }
-    }
+    // if no 'username' or 'password' variables, do not send request and alert the user
+    } else {
+      alert('Username and password fields cannot be empty!');
+    };
 };
   
   const signupFormHandler = async (event) => {
@@ -26,6 +30,7 @@ const loginFormHandler = async (event) => {
     const password = document.querySelector('#password-signup').value.trim();
   
     if (username && password) {
+      // POST request for creating a new user
       const response = await fetch('/api/user', {
         method: 'POST',
         body: JSON.stringify({ username, password }),
@@ -37,7 +42,10 @@ const loginFormHandler = async (event) => {
       } else {
         alert('Failed to sign up.');
       }
-    }
+    // if no 'username' or 'password' variables, do not send request and alert the user
+    } else {
+      alert('Username and password fields cannot be empty!');
+    };
 };
   
 document

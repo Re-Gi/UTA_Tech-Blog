@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { User, Post, Comment } = require('../models');
 
+// gets all existing posts along with creator usernames in descending order, then renders them to the homepage.handlebars
 router.get('/', async (req, res) => {
     try {
       const dbPostData = await Post.findAll({
@@ -28,8 +29,10 @@ router.get('/', async (req, res) => {
     }
 });
 
+// renders a post and it's comments with all related creator-usernames to the viewPost.handlebars
 router.get('/post/:id', async (req, res) => {
     try {
+      // finds a post by primary key(id) with the 'username' of the associated User
       const postData = await Post.findByPk(req.params.id, {
         include: [
           {
@@ -39,6 +42,7 @@ router.get('/post/:id', async (req, res) => {
         ],
       });
 
+      // finds all comments related to the post's 'id', along with the 'username' of each comment's associated User
       const commentData = await Comment.findAll({
         where: {
           post_id: req.params.id,
@@ -68,8 +72,9 @@ router.get('/post/:id', async (req, res) => {
     }
 });
 
+// renders login.handlebars
 router.get('/login', (req, res) => {
-  // If the user is already logged in, redirect the request to another route
+  // redirects to the homepage if the user is already logged in
   if (req.session.logged_in) {
     res.redirect('/');
     return;

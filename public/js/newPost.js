@@ -5,6 +5,7 @@ const newPostHandler = async (event) => {
     const content = document.querySelector('#newPost-contents').value.trim();
 
     if (title && content) {
+        // POST request to create a new post
         const response = await fetch('/api/post', {
             method: 'POST',
             body: JSON.stringify({ title, content }),
@@ -16,6 +17,7 @@ const newPostHandler = async (event) => {
         } else {
             alert('Failed to create note.');
         };
+    // if no 'title' or 'content' variables, do not send request and alert the user
     } else {
         alert('Your new post needs both title and content!');
     };

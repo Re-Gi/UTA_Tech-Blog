@@ -1,19 +1,9 @@
-/*
-WHEN I click on the button to add a new blog post
-THEN I am prompted to enter both a title and contents for my blog post
-WHEN I click on the button to create a new blog post
-THEN the title and contents of my post are saved and I am taken back to an updated dashboard with my new blog post
-    POST - create Post
-
-WHEN I click on one of my existing posts in the dashboard
-THEN I am able to delete or update my post and taken back to an updated dashboard
-    PUT - update Post by id
-    DELETE - destroy Post by id
-*/
 const router = require('express').Router();
 const { Post } = require('../../models');
+// routes using withAuth are only accessible when logged in
 const withAuth = require('../../utils/auth');
 
+// creates a new post, taking in 'title' and 'content' and assigning 'user_id' from the session.
 router.post('/', withAuth, async (req, res) => {
     try {
       const newPost = await Post.create({
@@ -27,6 +17,7 @@ router.post('/', withAuth, async (req, res) => {
     }
 });
 
+// updates post by id, user must be logged in as the post creator
 router.put('/:id', withAuth, async (req, res) => {
     try {
       const postData = await Post.update(req.body, {
@@ -47,6 +38,7 @@ router.put('/:id', withAuth, async (req, res) => {
     }
 });
 
+// deletes post by id, user must be logged in as the post creator
 router.delete('/:id', withAuth, async (req, res) => {
     try {
       const postData = await Post.destroy({

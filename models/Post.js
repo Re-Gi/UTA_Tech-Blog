@@ -15,6 +15,7 @@ Post.init(
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
+          // post titles cannot be empty or longer than 50 characters
           notEmpty: true,
           len: [1,50],
         },

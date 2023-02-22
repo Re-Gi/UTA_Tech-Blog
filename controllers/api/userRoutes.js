@@ -1,20 +1,12 @@
-/*
-WHEN I choose to sign up
-THEN I am prompted to create a username and password    
-    POST - create User
-
-WHEN I revisit the site at a later time and choose to sign in
-THEN I am prompted to enter my username and password
-    POST - find User info, bcrypt.compare()
-*/
-
 const router = require('express').Router();
 const { User } = require('../../models');
 
+// creates a new user, taking in 'username' and 'password'
 router.post('/', async (req, res) => {
   try {
     const userData = await User.create(req.body);
 
+    // logs the user in by starting a new session
     req.session.save(() => {
       req.session.username = userData.username;
       req.session.user_id = userData.id;
@@ -27,6 +19,7 @@ router.post('/', async (req, res) => {
   }
 });
 
+// logs users in, taking in 'username' and 'password'
 router.post('/login', async (req, res) => {
   try {
     const userData = await User.findOne({ where: { username: req.body.username } });
@@ -38,6 +31,7 @@ router.post('/login', async (req, res) => {
       return;
     }
 
+    // User model method, checks the password using bcrypt compare
     const validPassword = await userData.checkPassword(req.body.password);
 
     if (!validPassword) {
@@ -47,6 +41,7 @@ router.post('/login', async (req, res) => {
       return;
     }
 
+    // starts a new session
     req.session.save(() => {
       req.session.username = userData.username;
       req.session.user_id = userData.id;
@@ -60,6 +55,7 @@ router.post('/login', async (req, res) => {
   }
 });
 
+// logs users out by destroying their current session
 router.post('/logout', (req, res) => {
   if (req.session.logged_in) {
     req.session.destroy(() => {

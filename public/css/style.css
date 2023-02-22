@@ -32,6 +32,7 @@ nav {
 h1 {
     font-size: 4rem;
     color: rgba(255, 255, 255, 0.952);
+    font-weight: bold;
 }
 
 h2 {

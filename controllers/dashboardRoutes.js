@@ -1,10 +1,8 @@
-/* WHEN I click on the dashboard option in the navigation
-THEN I am taken to the dashboard and presented with any blog posts I have already created and the option to add a new blog post */
-
 const router = require('express').Router();
 const { User, Post, Comment } = require('../models');
 const withAuth = require('../utils/auth');
 
+// gets all of the current user's existing posts and renders the dashboard.handlebars with them
 router.get('/', withAuth, async (req, res) => {
     try {
         const userPostData = await Post.findAll({
@@ -28,12 +26,7 @@ router.get('/', withAuth, async (req, res) => {
     }
 });
 
-// WHEN I click on the button to add a new blog post
-// THEN I am prompted to enter both a title and contents for my blog post
-
-// WHEN I click on the button to create a new blog post
-// THEN the title and contents of my post are saved and I am taken back to an updated dashboard with my new blog post
-
+// renders the newPost.handlebars
 router.get('/new', withAuth, async (req, res) => {
     try {
       res.render('newPost', {
@@ -46,9 +39,7 @@ router.get('/new', withAuth, async (req, res) => {
     }
 });
 
-// WHEN I click on one of my existing posts in the dashboard
-// THEN I am able to delete or update my post and taken back to an updated dashboard
-
+// gets a user's post by id, then renders the editPost.handlebars with it
 router.get('/edit/:id', withAuth, async (req, res) => {
     try {
       const postData = await Post.findOne({

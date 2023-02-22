@@ -1,7 +1,9 @@
 const router = require('express').Router();
 const { Comment } = require('../../models');
+// routes using withAuth are only accessible when logged in
 const withAuth = require('../../utils/auth');
 
+// creates a new comment, taking in 'content' and assigning 'user_id' from the session.
 router.post('/', withAuth, async (req, res) => {
     try {
       const newComment = await Comment.create({
@@ -15,6 +17,7 @@ router.post('/', withAuth, async (req, res) => {
     }
 });
 
+// ! Future Development ! updates a comment by id, user must be logged in as the creator of the comment
 router.put('/:id', withAuth, async (req, res) => {
     try {
       const commentData = await Comment.update(req.body, {
@@ -35,6 +38,7 @@ router.put('/:id', withAuth, async (req, res) => {
     }
 });
 
+// ! Future Development ! deletes a comment by id, user must be logged in as the creator of the comment
 router.delete('/:id', withAuth, async (req, res) => {
     try {
       const commentData = await Comment.destroy({
